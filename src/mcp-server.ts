@@ -34,9 +34,6 @@ import { registerNetworkTools } from "./tools/network.js";
 import { registerFileTools } from "./tools/files.js";
 import { registerDialogTools } from "./tools/dialog.js";
 
-// Vision (coordinate-based)
-import { registerVisionTools } from "./tools/vision.js";
-
 // Testing & verification
 import { registerTestingTools } from "./tools/testing.js";
 
@@ -45,12 +42,6 @@ import { registerPdfTools } from "./tools/pdf.js";
 
 // Tracing
 import { registerTracingTools } from "./tools/tracing.js";
-
-// Install
-import { registerInstallTools } from "./tools/install.js";
-
-// Session
-import { registerSessionTools } from "./tools/session.js";
 
 export function createMcpServer(config: Config): {
   server: McpServer;
@@ -66,7 +57,7 @@ export function createMcpServer(config: Config): {
   // ── Core navigation & snapshot ──
   registerNavigateTools(server, connection);       // browser_navigate, browser_navigate_back
   registerSnapshotTools(server, connection);        // browser_snapshot
-  registerScreenshotTools(server, connection);      // browser_take_screenshot
+  registerScreenshotTools(server, connection, config); // browser_take_screenshot
 
   // ── Input tools ──
   registerClickTools(server, connection);           // browser_click
@@ -95,11 +86,6 @@ export function createMcpServer(config: Config): {
   registerFileTools(server, connection);            // browser_file_upload
   registerDialogTools(server, connection);          // browser_handle_dialog
 
-  // ── Vision (coordinate-based mouse) ──
-  registerVisionTools(server, connection);          // browser_mouse_move_xy, browser_mouse_click_xy,
-                                                    // browser_mouse_drag_xy, browser_mouse_down,
-                                                    // browser_mouse_up, browser_mouse_wheel
-
   // ── Testing & verification ──
   registerTestingTools(server, connection);         // browser_generate_locator, browser_verify_element_visible,
                                                     // browser_verify_text_visible, browser_verify_list_visible,
@@ -110,12 +96,6 @@ export function createMcpServer(config: Config): {
 
   // ── Tracing ──
   registerTracingTools(server, connection, config); // browser_start_tracing, browser_stop_tracing
-
-  // ── Install ──
-  registerInstallTools(server);                     // browser_install
-
-  // ── Session management ──
-  registerSessionTools(server, connection);         // browser_session
 
   return { server, connection };
 }

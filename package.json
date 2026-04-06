@@ -1,9 +1,17 @@
 {
-  "name": "visionclaw-browser-mcp",
-  "version": "0.1.0",
+  "name": "playwriter-browser-mcp",
+  "version": "0.1.2",
   "description": "MCP server bridging Playwriter's Chrome extension with Playwright-style structured tools for VisionClaw",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "playwriter-browser-mcp": "./dist/stdio.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./stdio": "./dist/stdio.js",
+    "./dist/stdio.js": "./dist/stdio.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -14,6 +22,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
+    "@xmorse/playwright-core": "^1.59.7",
     "playwriter": "^0.0.102",
     "zod": "^3.24.0"
   },
