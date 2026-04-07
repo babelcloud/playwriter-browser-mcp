@@ -1,6 +1,6 @@
 {
   "name": "playwriter-browser-mcp",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "MCP server bridging Playwriter's Chrome extension with Playwright-style structured tools for VisionClaw",
   "type": "module",
   "main": "dist/index.js",

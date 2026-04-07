@@ -16,7 +16,12 @@ export function registerNavigateTools(
     },
     async ({ url }) => {
       try {
-        const page = await conn.getPage();
+        // Always open a new tab for navigation to preserve existing pages
+        const context = await conn.getContext();
+        const newPage = await context.newPage();
+        conn.state.currentPageIndex = context.pages().indexOf(newPage);
+        conn.state.attachPageListeners(newPage);
+        const page = newPage;
         await page.goto(url, { waitUntil: "domcontentloaded" });
         await page.waitForLoadState("load", { timeout: 5000 }).catch(() => {});
         conn.state.resetForNavigation();

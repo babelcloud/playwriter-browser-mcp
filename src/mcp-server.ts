@@ -43,6 +43,9 @@ import { registerPdfTools } from "./tools/pdf.js";
 // Tracing
 import { registerTracingTools } from "./tools/tracing.js";
 
+// Connection recovery
+import { registerResetTools } from "./tools/reset.js";
+
 export function createMcpServer(config: Config): {
   server: McpServer;
   connection: BrowserConnection;
@@ -96,6 +99,9 @@ export function createMcpServer(config: Config): {
 
   // ── Tracing ──
   registerTracingTools(server, connection, config); // browser_start_tracing, browser_stop_tracing
+
+  // ── Connection recovery ──
+  registerResetTools(server, connection);             // browser_reset
 
   return { server, connection };
 }
